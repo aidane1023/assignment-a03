@@ -18,30 +18,52 @@ package baseline;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class Solution35 {
     public static void main(String[] args) {
         Solution35 app = new Solution35();
         //Initialize List
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
         //Declare variable for user string
         String name;
 
+
         //Begin loop
-        //Ask user to enter data for string
-        name = app.getStringFromUser();
-        //Add name to list
-        list.add(name);
-        //if blank is entered break loop (don't add to list)
+        int counter = 0;
+        while (true) {
+            counter = counter + 1;
+            //Ask user to enter data for string
+            name = app.getStringFromUser();
+
+            if (Objects.equals(name, "")) {
+                //if blank is entered break loop (don't add to list)
+                counter = counter - 1;
+                break;
+            }
+            else {
+                //Add name to list
+                list.add(name);
+            }
+        }
 
         //Random number selection
+        int rand = app.randomNumberGenerator(counter);
         //Print correlating name as winner
+        System.out.println("And the winner is..."+ list.get(rand));
     }
 
     private String getStringFromUser() {
         //Prompt user to enter data for string
+        System.out.println("Enter a name:");
         //Read in data for string
-        return null;
+        return in.nextLine();
     }
 
+    public int randomNumberGenerator(int counter) {
+       return (int)Math.floor(Math.random()*(counter+1)+0);
+    }
+
+    private static final Scanner in = new Scanner(System.in);
 }

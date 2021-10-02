@@ -14,6 +14,8 @@ Display the results in a tabular format.
  */
 package baseline;
 
+import java.util.Scanner;
+
 public class Solution31 {
     public static void main(String[] args) {
         Solution31 app = new Solution31();
@@ -22,26 +24,49 @@ public class Solution31 {
         int restBPM;
 
         //Ask user to enter data for int
-        age = app.getIntFromUser();
-        restBPM = app.getIntFromUser();
+        age = app.getIntFromUser("age");
+        restBPM = app.getIntFromUser("resting heart rate");
 
+        //Begin formatting table
+        System.out.println("Resting Pulse: "+ restBPM +"        Age:"+ age +"\n\n");
+        System.out.println("Intensity    | Rate\n");
+        System.out.println("-------------|--------\n");
 
-        //calculate target heart rate with provided data
+        //Calculate target heart rate with provided data
         app.calcTargetHeartRate(age, restBPM);
     }
 
-    private int getIntFromUser() {
+    private int getIntFromUser(String prompt) {
+        int temp = 0;
         //Prompt user for int data
+        System.out.println("Enter your "+ prompt +":");
         //Ensure data is valid input (number)
+        try {
+            temp = in.nextInt();
+        }
+        catch (Exception e) {
+            System.out.println("Must enter numerical value.");
+            getIntFromUser(prompt);
+        }
         //Return read in data
-        return 0;
+        return temp;
     }
 
     public void calcTargetHeartRate(int age, int restBPM) {
-        //Begin loop
         //assign current intensity. start at 55%, end at 95% (increments of 5)
-        //Calculate target heart rate for current intensity
-        //print target in tabloid format
-        //end loop after printing target for 95%
+        int intensity = 55;
+        //Begin loop
+        while (intensity <= 95) {
+            //Calculate target heart rate for current intensity
+            double targetHeartRate = Math.round((((220 - age) - restBPM) * (intensity/100)) + restBPM);
+            //increment intensity
+            intensity = intensity + 5;
+
+            //print target in tabloid format
+            System.out.println(intensity +"%          | "+ targetHeartRate +" bpm");
+            //end loop after printing target for 95%
+        }
     }
+
+    private static final Scanner in = new Scanner(System.in);
 }

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="baseline.Solution31Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-02T16:25:13" hostname="DESKTOP-BKLQ23J" time="0.018">
+  <properties/>
+  <testcase name="test_calcTargetHeartRate()" classname="baseline.Solution31Test" time="0.018"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

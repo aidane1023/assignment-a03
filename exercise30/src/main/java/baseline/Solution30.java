@@ -19,21 +19,24 @@ public class Solution30 {
 
     }
 
-    private void printTableLoop() {
+    public int printTableLoop() {
         //Declare necessary variables
-        int a;
-        int b;
+        int row;
+        int column;
+        int result = 0;
         //Begin loop for 12 rows ()
-        for (a =1; a <=12; ++a)
+        for (row =1; row <=12; ++row)
         {
             //Within row loop begin loop to print contents of 12 columns
-            for (b=1; b<=12; ++b)
+            for (column=1; column<=12; ++column)
             {
-                System.out.printf("%4d", a *b);
+                result = row * column;
+                System.out.printf("%4d", result);
                 //End column loop at end of each row and begin row loop again for each proceeding row
             }
             System.out.println();
             //End row loop after 12 rows printed
         }
+        return result;
     }
 }

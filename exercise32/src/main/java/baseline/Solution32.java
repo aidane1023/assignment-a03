@@ -20,6 +20,8 @@ During the game, count non-numeric entries as wrong guesses.
  */
 package baseline;
 
+import java.util.Scanner;
+
 public class Solution32 {
     public static void main(String[] args) {
         Solution32 app = new Solution32();
@@ -28,34 +30,78 @@ public class Solution32 {
         int number;
 
         //Ask user to enter data for difficulty
-        difficulty = app.getIntFromUser();
+        difficulty = app.getIntFromUser("Enter the difficulty level (1, 2, or 3):");
         //Pick number based on selected difficulty
-        number = numberPicker(difficulty);
+        number = app.numberPicker(difficulty);
+        System.out.println("I have my number.\n");
 
         //Call functions for loop so It can be tested
         app.highLow(number);
     }
 
-    private int getIntFromUser() {
+    private int getIntFromUser(String prompt) {
+        int temp = 0;
         //Prompt user to enter int
+        System.out.println(prompt);
         //Make sure data entered is an int
+        try {
+            temp = in.nextInt();
+        }
+        catch (Exception e) {
+            System.out.println("Must enter a numerical value (1, 2, or 3).");
+            getIntFromUser("Enter the difficulty level (1, 2, or 3):");
+        }
         //Return int
-        return 0;
+        return temp;
     }
 
-    private static int numberPicker(int difficulty) {
+    public int numberPicker(int difficulty) {
         //Based on difficulty trigger one of three random number pickers
+        int max = 2;
+        int min = 1;
         //1-10 if difficulty 1
+        if (difficulty == 1) {
+            max = 10;
+        }
         //1-100 if difficulty 2
+        if (difficulty == 2) {
+            max = 100;
+        }
         //1-1000 if difficulty 3
-        return 0;
+        if (difficulty == 3) {
+            max = 1000;
+        }
+
+        return (int)Math.floor(Math.random()*(max-min+1)+min);
     }
 
     public void highLow(int number) {
+        Solution32 app = new Solution32();
+        int counter = 0;
         //begin loop
-        //Ask user to enter data for guess
-        int guess = getIntFromUser();
-        //Return high or low based on guess and number
-        //End loop when guess equals number
+        while (true) {
+            counter = counter + 1;
+            //Ask user to enter data for guess
+            int guess = app.getIntFromUser("What's your guess?");
+            //Return high or low based on guess and number
+            if (number > guess) {
+                System.out.println("Too low. Guess again:");
+            }
+            else if (number < guess) {
+                System.out.println("Too high. Guess again:");
+            }
+            //End loop when guess equals number
+            else if (number == guess) {
+                if (counter == 1) {
+                    System.out.println("Correct! It took you 1 guess");
+                }
+                else {
+                    System.out.println("Correct! It took you " + counter + " guesses.");
+                }
+                break;
+            }
+        }
     }
+
+    private static final Scanner in = new Scanner(System.in);
 }
