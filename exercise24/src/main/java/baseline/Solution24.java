@@ -1,6 +1,6 @@
 /*
  *  UCF COP3330 Fall 2021 Assignment 3 Solutions
- *  Copyright 2021 first_name last_name
+ *  Copyright 2021 aidan earnest
  */
 
 /*
@@ -12,6 +12,9 @@ Check that both words are the same length.
  */
 package baseline;
 
+import java.util.Arrays;
+import java.util.Scanner;
+
 public class Solution24 {
     public static void main(String[] args) {
         Solution24 app = new Solution24();
@@ -19,28 +22,57 @@ public class Solution24 {
         String A;
         String B;
 
+        System.out.println("Enter two strings and I'll tell you if they're anagrams.");
         //Ask user to enter data for string A
-        A = app.getStringFromUser();
+        A = app.getStringFromUser("first");
         //Ask user to enter data for string B
-        B = app.getStringFromUser();
+        B = app.getStringFromUser("second");
 
         //Determine if two strings are anagrams of one another
-        String trueFalseGate = app.isAnagram(A, B);
+        String result = app.isAnagram(A, B);
 
         //Print the result
-
+        System.out.println(result);
     }
 
-    private String getStringFromUser() {
+    String getStringFromUser(String x) {
         //Print input prompt
+        System.out.println("Enter "+ x +" string:");
         //Read in String Data
         //Return String
-        return null;
+        return in.nextLine();
     }
 
-    private String isAnagram(String a, String b) {
+    String isAnagram(String a, String b) {
         //Determine if two strings are anagrams via sort function and string comp function
-        //Return true or false based on if strings are or are not anagrams
-        return null;
+        //Test string length
+        int n1 = a.length();
+        int n2 = b.length();
+        if (n1 != n2) {
+            return a + " and " + b + " are not anagrams.";
+        }
+        //Test contents of string
+        return sortString(a, b, n1);
     }
+
+    public String sortString(String a, String b, int x) {
+        //Converting string into an array for computation
+        char[] arr1 = a.toCharArray();
+        char[] arr2 = b.toCharArray();
+
+        //Sort for comparison
+        Arrays.sort(arr1);
+        Arrays.sort(arr2);
+
+        // Compare sorted strings
+        for (int i = 0; i < x; i++) {
+            if (arr1[i] != arr2[i]) {
+                return a + " and " + b + " are not anagrams.";
+            }
+        }
+
+        return a + " and " + b + " are anagrams.";
+    }
+
+    private static final Scanner in = new Scanner(System.in);
 }
