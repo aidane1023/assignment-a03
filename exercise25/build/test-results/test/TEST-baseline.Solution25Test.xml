@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="baseline.Solution25Test" tests="6" skipped="0" failures="0" errors="0" timestamp="2021-10-02T03:00:05" hostname="DESKTOP-BKLQ23J" time="0.03">
+  <properties/>
+  <testcase name="test_checkAlphabet1()" classname="baseline.Solution25Test" time="0.021"/>
+  <testcase name="test_checkAlphabet2()" classname="baseline.Solution25Test" time="0.002"/>
+  <testcase name="test_checkNumbers1()" classname="baseline.Solution25Test" time="0.001"/>
+  <testcase name="test_checkNumbers2()" classname="baseline.Solution25Test" time="0.001"/>
+  <testcase name="test_checkSymbol1()" classname="baseline.Solution25Test" time="0.001"/>
+  <testcase name="test_checkSymbol2()" classname="baseline.Solution25Test" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

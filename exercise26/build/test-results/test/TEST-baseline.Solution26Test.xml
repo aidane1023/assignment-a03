@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="baseline.Solution26Test" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-10-02T12:31:15" hostname="DESKTOP-BKLQ23J" time="0.031">
+  <properties/>
+  <testcase name="test_calculatorFormation()" classname="baseline.Solution26Test" time="0.031"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -13,6 +13,8 @@ Use a loop to trap bad input, so you can ensure that the user enters valid value
  */
 package baseline;
 
+import java.util.Scanner;
+
 public class Solution29 {
     public static void main(String[] args) {
         Solution29 app = new Solution29();
@@ -26,20 +28,38 @@ public class Solution29 {
         double years = app.calcTime(rate);
 
         //print the result
+        System.out.println("It will take "+ years +" years to double your initial investment.\n");
     }
 
-    private double getDoubleFromUser() {
+    public double getDoubleFromUser() {
+        double rate = 0;
         //Begin loop
-        //Prompt user for rate of return
-        //Cross-check provided data with conditional
-        //If conditionals not met restart loop
+        while (rate == 0) {
+            //Prompt user for rate of return
+            System.out.println("What is the rate of return?");
+            //Cross-check provided data with conditional
+            try {
+                rate = in.nextDouble();
+            }
+            catch (Exception e) {
+                System.out.println("Sorry, that is not a valid input.\n");
+                rate = 0;
+            }
+
+            if (rate == 0) {
+                System.out.println("Sorry, that is not a valid input.\n");
+                rate = 0;
+            }
+            //If conditionals not met restart loop
+        }
         //Else end loop and return double
-        return 0;
+        return rate;
     }
 
-    private double calcTime(double rate) {
+    public double calcTime(double rate) {
         //enter user data into provided formula
         //return resulting double
-        return 0;
+        return 72 / rate;
     }
+        private static final Scanner in = new Scanner(System.in);
 }

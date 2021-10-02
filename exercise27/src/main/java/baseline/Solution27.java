@@ -20,66 +20,101 @@ Use a single output statement to display the outputs.
 
 package baseline;
 
+import java.util.Objects;
+import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Solution27 {
     public static void main(String[] args) {
         Solution27 app = new Solution27();
-        //Declare String variables for first name, last name, and employee ID
+        //Declare String variables for first name, last name, employee ID, and zip
         String firstName;
         String lastName;
         String ID;
-        //Declare int variable for Zip
-        int zip;
+        String zip;
 
         //Ask user to enter Data for string firstName
-        firstName = app.getStringFromUser();
+        firstName = app.getStringFromUser("first name");
         //Ask user to enter Data for string lastName
-        lastName = app.getStringFromUser();
+        lastName = app.getStringFromUser("last name");
         //Ask user to enter Data for string ID
-        ID = app.getStringFromUser();
+        ID = app.getStringFromUser("ID");
         //Ask user to enter Data for int zip
-        zip = app.getIntFromUser();
+        zip = app.getStringFromUser("zip");
         
         //Validate data for first name
-        String firstNameValid = app.validateName(firstName);
+        String firstNameValid = app.validateName(firstName, "first");
         //Validate data for last name
-        String lastNameValid = app.validateName(lastName);
+        String lastNameValid = app.validateName(lastName, "last");
         //Validate data for ID
         String IDValid = app.validateID(ID);
         //Validate data for zip
         String zipValid = app.validateZip(zip);
 
         //Print results. Either list of errors or cleared statement
+        app.printer(firstNameValid + lastNameValid + IDValid + zipValid);
+    }
+    private void printer(String str) {
+        if (Objects.equals(str, "")) {
+            str = "There were no errors found.";
+        }
+        System.out.println(str);
     }
 
-    private String getStringFromUser() {
+    private String getStringFromUser(String prompt) {
         //Print input prompt
+        printer("Enter the "+ prompt +":");
         //Read in String Data
         //Return String
-        return null;
+        return in.nextLine();
     }
 
-    private int getIntFromUser() {
-        //Print input prompt
-        //Read in int Data
-        //Return int
-        return 0;
-    }
-
-    private String validateName(String name) {
+    public String validateName(String name, String prompt) {
+        String errorMessage = "";
         //Ensure String isn't empty
+        if (name == null) {
+            errorMessage = errorMessage +"The "+ prompt +" name must be filled in.\n";
+        }
+        assert name != null;
+        if (name.length() < 2) {
+            errorMessage = errorMessage +"The "+ prompt +" name must be at least two characters long.\n";
+        }
         //return appropriate error if necessary
-        return null;
+        return errorMessage;
     }
 
-    private String validateID(String ID) {
+    public String validateID(String ID) {
+        String errorMessage;
         //Ensure ID has proper format AA-1234
+        Pattern p = Pattern.compile(("^[a-z]{2}-[0-9]{4}$"), Pattern.CASE_INSENSITIVE);
+        Matcher m = p.matcher(ID);
+        if (m.matches()) {
+            errorMessage = "";
+        }
         //return appropriate error if necessary
-        return null;
+        else {
+            errorMessage = "The employee ID must be in the format of AA-1234.\n";
+        }
+        return errorMessage;
     }
 
-    private String validateZip(int zip) {
+    public String validateZip(String zip) {
         //Ensure zip is a number
-        //return appropriate error if necessary
-        return null;
+        try {
+            Integer.parseInt(zip);
+        }
+        catch(Exception e) {
+            //return appropriate error if necessary
+            return "The zipcode must be a 5 digit number.\n";
+        }
+        // ensure length of 5
+        if (zip.length() < 5) {
+            //return appropriate error if necessary
+            return "The zipcode must be a 5 digit number.\n";
+        }
+        return "";
     }
+
+    private static final Scanner in = new Scanner(System.in);
 }

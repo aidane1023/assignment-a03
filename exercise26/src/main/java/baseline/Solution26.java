@@ -17,44 +17,46 @@ Round fractions of a cent up to the next cent.
 
 package baseline;
 
+import java.util.Scanner;
+
 public class Solution26 {
     public static void main(String[] args) {
         Solution26 app = new Solution26();
-        //Declare 2 doubles: Balance, Monthly
-        double balance;
-        double monthly;
-        //Declare 1 int: APR
-        double APR;
+        //Declare payment calculator
+        paymentCalculator A;
 
-        //Ask user to enter data for double Balance
-        balance = app.getDoubleFromUser();
-        //Ask user to enter data for int APR
-        APR = app.getIntFromUser();
-        //Ask user to enter data for double monthly
-        monthly = app.getDoubleFromUser();
+        //Ask user to enter data for double values
+        A = app.getDataFromUser();
 
         //Calculate time needed to pay off balance
-        double time = app.calcTime(balance, APR, monthly);
+        double months = app.calculateMonthsUntilPaidOff(A.b, A.i, A.p);
+
+        //Print Results
+        System.out.println("It will take you "+ months +" months to pay off this card.");
 
     }
 
-    private int getIntFromUser() {
-        //Print input prompt
-        //Read in int Data
-        //Return int
-        return 0;
+    private double calculateMonthsUntilPaidOff(double b, double i, double p) {
+        return -(0.033333333) * Math.log(1 + b/p * (1 - Math.pow(1 + i,30)) / Math.log(1 + i));
     }
 
-    private double getDoubleFromUser() {
+    private paymentCalculator getDataFromUser() {
         //Print input prompt
+        System.out.println("What is your balance?");
         //Read in double Data
-        //Return double
-        return 0;
+        double balance = in.nextDouble();
+        //Print input prompt
+        System.out.println("What is the APR on the card (as a percent)?");
+        //Read in double Data
+        double APR = in.nextDouble();
+        APR = APR / 100;
+        //Print input prompt
+        System.out.println("What is the monthly payment you can make?");
+        //Read in double Data
+        double monthly = in.nextDouble();
+        //Return
+        return new paymentCalculator(balance, APR, monthly);
     }
 
-    private double calcTime(double balance, double apr, double monthly) {
-        //plug user data into provided formula
-        //return number of months for balance to be paid off
-        return 0;
-    }
+    private static final Scanner in = new Scanner(System.in);
 }
