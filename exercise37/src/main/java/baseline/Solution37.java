@@ -16,6 +16,8 @@ package baseline;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Solution37 {
     public static void main(String[] args) {
@@ -33,45 +35,92 @@ public class Solution37 {
         int totalSymbols;
 
         //Ask user to enter data for ints
-        minLength = app.getIntFromUser();
-        totalNumbers = app.getIntFromUser();
-        totalSymbols = app.getIntFromUser();
+        minLength = app.getIntFromUser("What's the minimum length?");
+        totalNumbers = app.getIntFromUser("How many special characters?");
+        totalSymbols = app.getIntFromUser("How many numbers?");
 
         //Run logic to determine how many letters needed
-        int totalLetters = app.getTotalLetters();
-        int lenght = 0; //Sum of all totals
+        int totalLetters = app.getTotalLetters(minLength, totalNumbers, totalSymbols);
+        int length = totalLetters + totalNumbers + totalSymbols; //Sum of all totals
         
         //Build password
         
-        String password = app.buildPassword(characters, lenght);
+        String password = app.buildPassword(characters, length, totalNumbers, totalSymbols);
 
         //Return generated string
+        System.out.println("Generated password is: "+ password);
     }
 
-    private int getIntFromUser() {
+    private int getIntFromUser(String prompt) {
+        int temp = 0;
         //Prompt user to enter data
+        System.out.println(prompt);
         //Make sure data is valid
+        try {
+            temp = in.nextInt();
+        }
+        catch (Exception e) {
+            System.out.println("Must enter an integer.");
+            getIntFromUser(prompt);
+        }
         //Return int
-        return 0;
+        return temp;
     }
 
-    private String buildPassword(List<String> characters, int length) {
+    private String buildPassword(List<String> characters, int length, int numbers, int symbols) {
         //Initialize local variables
         StringBuilder password = new StringBuilder(length);
         Random random = new Random(System.nanoTime());
-        //logic for how many of each character
-
+        //initialize loop variables
+        int num = 0;
+        int sym = 0;
         //Begin loop
-        //Select character type count based on solved logic
-        //Enter character type into string at random position
+
+        for (int i = 0; i <= length + 3; i++) {
+            int rand = ThreadLocalRandom.current().nextInt(0, 2 + 1);
+            String charCategory = characters.get(rand);
+            if (rand == 1) {
+                num++;
+                if (num > numbers) {
+                    charCategory = characters.get(0);
+                }
+            }
+            else if (rand == 2) {
+                sym++;
+                if (sym > symbols) {
+                    charCategory = characters.get(0);
+                }
+            }
+            int position = random.nextInt(charCategory.length());
+            password.append(charCategory.charAt(position));
+        }
+        while (num < numbers) {
+            String charCategory = characters.get(1);
+            int position = random.nextInt(charCategory.length());
+            password.append(charCategory.charAt(position));
+            num++;
+        }
+        while (sym < symbols) {
+            String charCategory = characters.get(2);
+            int position = random.nextInt(charCategory.length());
+            password.append(charCategory.charAt(position));
+            sym++;
+        }
+
         //End loop once string length it met
 
         //Return string
-        return null;
+        return new String(password);
     }
 
-    private int getTotalLetters() {
+    public int getTotalLetters(int l, int n, int s) {
         //Letters must be equal or greater to number of numbers and symbols combined
-        return 0;
+        int letters = n + s;
+        if (l > (letters + n + s)) {
+            letters = (l - (n + s));
+        }
+        return letters;
     }
+
+    private static final Scanner in = new Scanner(System.in);
 }

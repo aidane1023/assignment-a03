@@ -18,33 +18,38 @@ import java.util.Map;
 public class Solution40 {
     public static void main(String[] args) {
         Solution40 app = new Solution40();
-
-        //Initialize list
+//Initialize list
         List<Map> employeeList = new ArrayList<>();
         //Initialize maps
-        Map<Integer, Employee> employee
-                = new HashMap<Integer, Employee>();
+        Map<Integer, Employee> employee = new HashMap<Integer, Employee>();
 
-        //Make employees
-        Employee info = app.newClassInstance();
-        employee.put(1, info);
+        //Make employee
+        Employee John = new Employee("John", "Johnson", "Manager","2016-12-31");;
+        employee.put(1, John);
         //repeat for all employees
+        Employee xio = new Employee("Tou", "Xiong", "Software Engineer","2016-10-05");;
+        employee.put(2, xio);
+        Employee Mich = new Employee("Michaela", "Michaelson", "District Manager","2015-12-19");;
+        employee.put(3, Mich);
+        Employee Jaco = new Employee("Jake", "Jacobson", "Programmer","");;
+        employee.put(4, Jaco);
+        Employee Jack = new Employee("Jacquelyn", "Jackson", "DBA","");;
+        employee.put(5, Jack);
+        Employee Web = new Employee("Sally", "Webber", "Web Developer","2015-12-18");;
+        employee.put(6, Web);
 
         //Add employee maps to list
         employeeList.add(employee);
+        //Sort alphabetically
 
-        //Ask user to enter a string
-        String key = app.getStringFromUser();
+        //Print contents into a alphabetical table
+        app.printTable(employeeList);
     }
 
-    private String getStringFromUser() {
-        //Prompt user for string data
-        //Read in string data
-        //Return string data
-        return null;
+    private void printTable(List<Map> employeeList) {
+
+
+        //Print a format for table
     }
 
-    private Employee newClassInstance() {
-        return new Employee("", "", "","");
-    }
 }
